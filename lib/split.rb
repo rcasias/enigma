@@ -1,7 +1,7 @@
-# require_relative 'find'
+require './lib/find'
 
 module Split
-  # include 'find'
+  include Find
 
   def split_key_first
     first_key_integer = @key[0..1].to_i

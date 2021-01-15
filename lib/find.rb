@@ -1,7 +1,7 @@
-# require_relative 'split'
+require './lib/split'
 
 module Find
-  # include 'split'
+  include Split
 
   def find_first_number
     first_number = (first_key_integer + first_date_integer)
