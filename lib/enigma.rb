@@ -12,10 +12,9 @@ class Enigma
               :date
 
   def initialize
-    @descrption = descrption
+    @descrption = "Test"
     @key        = key
     @date       = date
-    binding.pry
   end
 
   def encrypt(descrption, key, date)
@@ -36,7 +35,6 @@ class Enigma
     part_5 = (number_4 + number_5)
 
     @key = (part_2 + part_3 + part_4 + part_5)
-    # binding.prsy
   end
 
   def create_key_array
@@ -65,15 +63,43 @@ class Enigma
 
   def encrypt_array
     encrypt_numbers = []
-    encrypt << create_key_array[0] + create_date_array[0]
-    encrypt << create_key_array[1] + create_date_array[1]
-    encrypt << create_key_array[2] + create_date_array[2]
-    encrypt << create_key_array[3] + create_date_array[3]
+    encrypt_numbers << create_key_array[0] + create_date_array[0]
+    encrypt_numbers << create_key_array[1] + create_date_array[1]
+    encrypt_numbers << create_key_array[2] + create_date_array[2]
+    encrypt_numbers << create_key_array[3] + create_date_array[3]
 
   end
 
+
   def alphabet
     alphabet = ("a".."z").to_a << " "
+    alphabet_hash = alphabet.each_with_object({}) do |letter, hash|
+      hash[letter] = letter.ord
+    end
+    # binding.pry
+  end
+
+
+
+  def encrypt_message(description, encryption_numbers)
+    descrption = @descrption
+    encryption_numbers = encrypt_array
+    descrption.downcase
+    # number = number.to_i
+    new_message = []
+    encryption_numbers.each do |number|
+      array = []
+      descrption.each_char do |letter|
+        result = letter.ord
+        result += number
+        binding.pry
+        new_result = result.chr
+        array.push(new_result)
+      end
+      array
+      new_message = array
+    end
+    new_message
   end
 
 end
