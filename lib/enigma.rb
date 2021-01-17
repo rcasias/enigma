@@ -88,16 +88,17 @@ class Enigma
   end
 
 
-  #
-  # def translate_message_into_numbers(message)
-  #   message = @descrption
-  #   translation_array = []
-  #   message.each_char do |letter|
-  #     result = (letter.ord + encrypt_array[0])
-  #     translation_array <<  result
-  #     encrypt_array.rotate
-  #   end
-  # end
+
+  def translate_message_into_numbers(message)
+    message = @descrption
+    translation_array = []
+    message.each_char do |letter|
+      result = (letter.ord + encrypt_array[0])
+      translation_array <<  result
+      encrypt_array.rotate
+    end
+    binding.pry
+  end
 
   # def move_numbers_by_rotation(rot)
 
@@ -112,7 +113,6 @@ class Enigma
   #     descrption.each_char do |letter|
   #       result = letter.ord
   #       result += number
-  #       binding.pry
   #       new_result = result.chr
   #       array.push(new_result)
   #     end
