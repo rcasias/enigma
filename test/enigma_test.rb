@@ -65,13 +65,14 @@ class EnigmaTest < Minitest::Test
     assert_equal "b", alphabet_hash.key(98)
   end
 
-  def test_encrypt_message
+  def test_alphabet_hash
     enigma = Enigma.new
     alphabet = ("a".."z").to_a << " "
     enigma.encrypt("hello world", "02715", "01142021")
+    expect = enigma.alphabet_rotation[0].key("e")
 
-    # assert_equal [], enigma.encrypt_message("hello world", "3212126")
-    # assert_equal [], enigma.find_character_number
+    assert_equal "a", enigma.alphabet_rotation[0].key("e")
+    assert_equal "r", enigma.alphabet_rotation[1]["a"]
   end
 
 
