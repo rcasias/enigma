@@ -73,6 +73,8 @@ class EnigmaTest < Minitest::Test
 
     assert_equal "a", enigma.alphabet_rotation[0].key("e")
     assert_equal "r", enigma.alphabet_rotation[1]["a"]
+    assert_equal "a", enigma.alphabet_rotation[2].key("h")
+    assert_equal "b", enigma.alphabet_rotation[3]["a"]
   end
 
 
