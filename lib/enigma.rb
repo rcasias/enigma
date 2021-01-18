@@ -109,15 +109,20 @@ class Enigma
   def alphabet_rotation_encrypt
     new_alphabet = []
 
-    binding.pry
     # binding.pry
     encryption_cycle.each do |num|
 
       new_alphabet << alphabet_numbers.rotate(num[0]).rotate(num[1])[0]
     end
     #this method moves a over [4,71,7,1] spaces
+    binding.pry
   end
 
   def find_letter_at_number_key
-  end  
+    new_message = []
+    new_alphabet.each do |number|
+      new_message << alphabet_rotation[0][number]
+    end
+    new_message.join
+  end
 end
