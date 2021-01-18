@@ -76,50 +76,48 @@ class Enigma
     # alphabet_hash = alphabet.each_with_object({}) do |letter, hash|
     #   hash[letter] = letter.ord
     # end
+    # alphabet_numbers = []
+    # alphabet.each do |letter|
+    #   alphabet_numbers << (letter.ord - 97)
+    # end
+    # alphabet_numbers
+  end
 
+  def encryption_cycle
+    letter_array = []
+    @descrption.each_char do |letter|
+      letter_array << (letter.ord - 97)
+    end
+    letter_array.zip(encrypt_array.cycle)
+    #[["h", 4], ["e", 71], ["l", 7], ["l", 1], ["o", 4], [" ", 71], ["w", 7], ["o", 1], ["r", 4], ["l", 71], ["d", 7]]
+  end
+
+  def alphabet_numbers
+    alphabet_number_array = []
+    alphabet.each do |letter|
+      alphabet_number_array << (letter.ord - 97)
+    end
+    alphabet_number_array
   end
 
   def alphabet_rotation
-    alphabet_hashes = []
-    encrypt_array.each do |num|
-      alphabet_hashes << alphabet.zip(alphabet.rotate(num)).to_h
-    end
-    alphabet_hashes
+    alphabet_hash = []
+      alphabet_hash << alphabet_numbers.zip(alphabet).to_h
+    alphabet_hash
   end
 
+  def alphabet_rotation_encrypt
+    new_alphabet = []
 
-
-  def translate_message_into_numbers(message)
-    message = @descrption
-    translation_array = []
-    message.each_char do |letter|
-      result = (letter.ord + encrypt_array[0])
-      translation_array <<  result
-      encrypt_array.rotate
-    end
     binding.pry
+    # binding.pry
+    encryption_cycle.each do |num|
+
+      new_alphabet << alphabet_numbers.rotate(num[0]).rotate(num[1])[0]
+    end
+    #this method moves a over [4,71,7,1] spaces
   end
 
-  # def move_numbers_by_rotation(rot)
-
-  # def encrypt_message(description, encryption_numbers)
-  #   descrption = @descrption
-  #   encryption_numbers = encrypt_array
-  #   descrption.downcase
-  #   # number = number.to_i
-  #   new_message = []
-  #   encryption_numbers.each do |number|
-  #     array = []
-  #     descrption.each_char do |letter|
-  #       result = letter.ord
-  #       result += number
-  #       new_result = result.chr
-  #       array.push(new_result)
-  #     end
-  #     array
-  #     new_message = array
-  #   end
-  #   new_message
-  # end
-
+  def find_letter_at_number_key
+  end  
 end
