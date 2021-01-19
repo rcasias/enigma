@@ -29,6 +29,5 @@ class Decryptor
     enigma.decryption_cycle(@description, @code)
     enigma.alphabet_rotation_decrypt(@description, @code)
     puts "Your message translates to: #{enigma.find_number_at_letter_value(@description, @code)}!"
-    # p enigma.find_number_at_letter_value(@description, @code)
   end
 end
