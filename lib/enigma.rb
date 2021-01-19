@@ -2,14 +2,15 @@ require'pry'
 
 class Enigma
 
-  attr_reader :descrption,
+  attr_reader :description,
               :key,
               :date
 
-  def encrypt(descrption, key, date)
-    @description = descrption
+  def encrypt(description, key, date)
+    @description = description
     @key = key
     @date = date
+    # binding.pry
   end
 
   def find_key_string
@@ -144,6 +145,7 @@ class Enigma
 
   def decrypt_number_array(string)
     decrypt_numbers = []
+    # binding.pry
     decrypt_numbers << create_key_array_for_decoder(string)[0] + create_date_array[0]
     decrypt_numbers << create_key_array_for_decoder(string)[1] + create_date_array[1]
     decrypt_numbers << create_key_array_for_decoder(string)[2] + create_date_array[2]

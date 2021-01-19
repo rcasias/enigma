@@ -6,7 +6,7 @@ class Encryptor
     print "What would you like to encrypt?"
     print "> "
     @description = $stdin.gets.chomp.downcase
-    puts "Please wait while I create your random encryption code!"
+    puts "Please wait while I create your random decryption code!"
     sleep(2)
     create_code
   end
@@ -16,11 +16,11 @@ class Encryptor
     enigma.find_key_string
     enigma.create_key_array
     puts "Your decryption code is: #{enigma.your_key}"
-    puts "Please save this code for reference!"
     enigma.find_date_string
     enigma.create_date_array
     enigma.encrypt_array
-    enigma.date
+    puts "Your date is: #{enigma.date}"
+    puts "Please save these numbers for reference!"
     enigma.alphabet
     enigma.encryption_cycle(@description)
     enigma.alphabet_numbers
