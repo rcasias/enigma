@@ -36,11 +36,11 @@ class Enigma
 
   def your_key
     your_key = []
-    your_key << @key[0..1]
-    your_key << @key[3]
-    your_key << @key[5]
-    your_key << @key[7]
-    your_key.join.to_s
+    your_key << create_key_array[0..1]
+    your_key << create_key_array[3]
+    your_key << create_key_array[5]
+    your_key << create_key_array[7]
+    your_key.join.to_s.rjust(5, '0')
   end
 
   def find_date_string
@@ -128,46 +128,84 @@ class Enigma
 
 
 
+  #
+  # def decrypt_word
+  #   word = "lvsmsqcpvbk"
+  # end
 
-  def decrypt_word
-    word = "lvsmsqcpvbk"
+  # def decrypt_array
+  #   decrypt_array = []
+  #   encrypt_array.each do |num|
+  #     decrypt_array << (num * -1)
+  #   end
+  #   decrypt_array
+  # end
+
+
+  def decrypt_string_to_array(string)
+    key_array = []
+    key_array << (string.to_s[1])
+    key_array << (string.to_s[2])
+    key_array << (string.to_s[3])
+    key_array << (string.to_s[4])
+    key_array
   end
 
-  def decrypt_array
+  def create_key_array_for_decoder(string)
+    new_array = []
+    new_array << (decrypt_string_to_array(string)[0]).to_i
+    new_array << (decrypt_string_to_array(string)[0] + decrypt_string_to_array(string)[1]).to_i
+    new_array << (decrypt_string_to_array(string)[1] + decrypt_string_to_array(string)[2]).to_i
+    new_array << (decrypt_string_to_array(string)[2] + decrypt_string_to_array(string)[3]).to_i
+    new_array
+    # binding.pry
+  end
+
+  def decrypt_number_array(string)
+    decrypt_numbers = []
+    decrypt_numbers << create_key_array_for_decoder(string)[0] + create_date_array[0]
+    decrypt_numbers << create_key_array_for_decoder(string)[1] + create_date_array[1]
+    decrypt_numbers << create_key_array_for_decoder(string)[2] + create_date_array[2]
+    decrypt_numbers << create_key_array_for_decoder(string)[3] + create_date_array[3]
+    decrypt_numbers
+    # binding.pry
+  end
+
+  def decrypt_array(string)
     decrypt_array = []
-    encrypt_array.each do |num|
+    decrypt_number_array(string).each do |num|
       decrypt_array << (num * -1)
     end
     decrypt_array
   end
 
-  def decryption_cycle
+  def decryption_cycle(encrypted_message, string)
     letter_array = []
-    decrypt_word.each_char do |letter|
+    encrypted_message.each_char do |letter|
     	if letter == " "
     	  letter_array << 26
       else
         letter_array << (letter.ord - 97)
       end
     end
-    letter_array.zip(decrypt_array.cycle)
+    letter_array.zip(decrypt_array(string).cycle)
   end
 
-  def alphabet_rotation_decrypt
+  def alphabet_rotation_decrypt(encrypted_message, string)
     new_alphabet = []
-    decryption_cycle.each do |num|
+    decryption_cycle(encrypted_message, string).each do |num|
       new_alphabet << alphabet_numbers.rotate(num[0]).rotate(num[1])[0]
     end
     new_alphabet
   end
 
-  def find_number_at_letter_value
+  def find_number_at_letter_value(encrypted_message, string)
     new_message = []
-    alphabet_rotation_decrypt.each do |number|
+    alphabet_rotation_decrypt(encrypted_message, string).each do |number|
       new_message << alphabet_rotation[0][number]
     end
     new_message.join
-    binding.pry
+    # binding.pry
   end
 
 end

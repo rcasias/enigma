@@ -1,11 +1,6 @@
 require './lib/enigma'
 
 class Encryptor
-  # attr_reader :description
-  #
-  # def initialize
-  #   @description = description
-  # end
 
   def start
     print "What would you like encrypted?"
@@ -19,7 +14,7 @@ class Encryptor
   def create_code
     enigma = Enigma.new
     enigma.find_key_string
-    enigma.create_key_array
+    p enigma.create_key_array
     p enigma.your_key
     enigma.find_date_string
     enigma.create_date_array
@@ -28,7 +23,6 @@ class Encryptor
 
 
     enigma.alphabet
-    @description
     enigma.encryption_cycle(@description)
     enigma.alphabet_numbers
     enigma.alphabet_rotation
