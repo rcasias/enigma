@@ -34,12 +34,28 @@ class Enigma
     key_array << @key[6..7].to_i
   end
 
+  def your_key
+    your_key = []
+    your_key << @key[0..1]
+    your_key << @key[3]
+    your_key << @key[5]
+    your_key << @key[7]
+    your_key.join.to_s
+  end
+
   def find_date_string
     month = Time.now.month.to_s.rjust(2, "0")
     day = Time.now.day.to_s.rjust(2, "0")
     year = (Time.now.year % 100).to_s
     part_5 = (month + day + year).to_i
     @date = (part_5 * part_5).to_s
+  end
+
+  def date
+    month = Time.now.month.to_s.rjust(2, "0")
+    day = Time.now.day.to_s.rjust(2, "0")
+    year = (Time.now.year % 100).to_s
+    part_5 = (month + day + year)
   end
 
   def create_date_array
