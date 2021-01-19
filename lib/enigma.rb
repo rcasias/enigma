@@ -1,21 +1,10 @@
-# require './lib/split'
-# require './lib/find'
-
 require'pry'
 
 class Enigma
-  # include Split
-  # include Find
 
   attr_reader :descrption,
               :key,
               :date
-
-  def initialize
-    @descrption = "Test"
-    @key        = key
-    @date       = date
-  end
 
   def encrypt(descrption, key, date)
     @descrption = descrption
@@ -67,35 +56,32 @@ class Enigma
     encrypt_numbers << create_key_array[1] + create_date_array[1]
     encrypt_numbers << create_key_array[2] + create_date_array[2]
     encrypt_numbers << create_key_array[3] + create_date_array[3]
-
   end
-
 
   def alphabet
     alphabet = ("a".."z").to_a << " "
-    # alphabet_hash = alphabet.each_with_object({}) do |letter, hash|
-    #   hash[letter] = letter.ord
-    # end
-    # alphabet_numbers = []
-    # alphabet.each do |letter|
-    #   alphabet_numbers << (letter.ord - 97)
-    # end
-    # alphabet_numbers
   end
 
   def encryption_cycle
     letter_array = []
     @descrption.each_char do |letter|
-      letter_array << (letter.ord - 97)
+    	if letter == " "
+    	  letter_array << 26
+      else
+        letter_array << (letter.ord - 97)
+      end
     end
     letter_array.zip(encrypt_array.cycle)
-    #[["h", 4], ["e", 71], ["l", 7], ["l", 1], ["o", 4], [" ", 71], ["w", 7], ["o", 1], ["r", 4], ["l", 71], ["d", 7]]
   end
 
   def alphabet_numbers
     alphabet_number_array = []
     alphabet.each do |letter|
-      alphabet_number_array << (letter.ord - 97)
+      if letter == " "
+    	  alphabet_number_array << 26
+      else
+        alphabet_number_array << (letter.ord - 97)
+      end
     end
     alphabet_number_array
   end
@@ -108,21 +94,63 @@ class Enigma
 
   def alphabet_rotation_encrypt
     new_alphabet = []
-
-    # binding.pry
     encryption_cycle.each do |num|
-
       new_alphabet << alphabet_numbers.rotate(num[0]).rotate(num[1])[0]
     end
-    #this method moves a over [4,71,7,1] spaces
-    binding.pry
+    new_alphabet
   end
 
   def find_letter_at_number_key
     new_message = []
-    new_alphabet.each do |number|
+    alphabet_rotation_encrypt.each do |number|
       new_message << alphabet_rotation[0][number]
     end
     new_message.join
+    # binding.pry
   end
+
+
+
+
+  def decrypt_word
+    word = "lvsmsqcpvbk"
+  end
+
+  def decrypt_array
+    decrypt_array = []
+    encrypt_array.each do |num|
+      decrypt_array << (num * -1)
+    end
+    decrypt_array
+  end
+
+  def decryption_cycle
+    letter_array = []
+    decrypt_word.each_char do |letter|
+    	if letter == " "
+    	  letter_array << 26
+      else
+        letter_array << (letter.ord - 97)
+      end
+    end
+    letter_array.zip(decrypt_array.cycle)
+  end
+
+  def alphabet_rotation_decrypt
+    new_alphabet = []
+    decryption_cycle.each do |num|
+      new_alphabet << alphabet_numbers.rotate(num[0]).rotate(num[1])[0]
+    end
+    new_alphabet
+  end
+
+  def find_number_at_letter_value
+    new_message = []
+    alphabet_rotation_decrypt.each do |number|
+      new_message << alphabet_rotation[0][number]
+    end
+    new_message.join
+    binding.pry
+  end
+
 end

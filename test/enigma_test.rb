@@ -92,7 +92,7 @@ class EnigmaTest < Minitest::Test
     enigma.encrypt("hello world", "02715", "01142021")
     expect = enigma.alphabet_rotation[0].key("e")
 
-    assert_equal [], enigma.alphabet_rotation_encrypt
+    assert_equal [], enigma.find_number_at_letter_value
   end
 
 

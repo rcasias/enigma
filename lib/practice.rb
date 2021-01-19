@@ -58,3 +58,11 @@ def encrypt_message(description, encryption_numbers)
   end
   new_message
 end
+
+def encryption_cycle
+  letter_array = []
+  @descrption.each_char do |letter|
+    letter_array << (letter.ord - 97)
+  end
+  letter_array.zip(encrypt_array.cycle)
+end
