@@ -7,7 +7,7 @@ class Enigma
               :date
 
   def encrypt(descrption, key, date)
-    @descrption = descrption
+    @description = descrption
     @key = key
     @date = date
   end
@@ -78,9 +78,10 @@ class Enigma
     alphabet = ("a".."z").to_a << " "
   end
 
-  def encryption_cycle
+  def encryption_cycle(message)
+    # message = @description
     letter_array = []
-    @descrption.each_char do |letter|
+    message.each_char do |letter|
     	if letter == " "
     	  letter_array << 26
       else
@@ -108,17 +109,17 @@ class Enigma
     alphabet_hash
   end
 
-  def alphabet_rotation_encrypt
+  def alphabet_rotation_encrypt(message)
     new_alphabet = []
-    encryption_cycle.each do |num|
+    encryption_cycle(message).each do |num|
       new_alphabet << alphabet_numbers.rotate(num[0]).rotate(num[1])[0]
     end
     new_alphabet
   end
 
-  def find_letter_at_number_key
+  def find_letter_at_number_key(message)
     new_message = []
-    alphabet_rotation_encrypt.each do |number|
+    alphabet_rotation_encrypt(message).each do |number|
       new_message << alphabet_rotation[0][number]
     end
     new_message.join
