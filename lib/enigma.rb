@@ -79,7 +79,6 @@ class Enigma
   end
 
   def encryption_cycle(message)
-    # message = @description
     letter_array = []
     message.each_char do |letter|
     	if letter == " "
@@ -123,24 +122,7 @@ class Enigma
       new_message << alphabet_rotation[0][number]
     end
     new_message.join
-    # binding.pry
   end
-
-
-
-  #
-  # def decrypt_word
-  #   word = "lvsmsqcpvbk"
-  # end
-
-  # def decrypt_array
-  #   decrypt_array = []
-  #   encrypt_array.each do |num|
-  #     decrypt_array << (num * -1)
-  #   end
-  #   decrypt_array
-  # end
-
 
   def decrypt_string_to_array(string)
     key_array = []
@@ -158,7 +140,6 @@ class Enigma
     new_array << (decrypt_string_to_array(string)[1] + decrypt_string_to_array(string)[2]).to_i
     new_array << (decrypt_string_to_array(string)[2] + decrypt_string_to_array(string)[3]).to_i
     new_array
-    # binding.pry
   end
 
   def decrypt_number_array(string)
@@ -168,7 +149,6 @@ class Enigma
     decrypt_numbers << create_key_array_for_decoder(string)[2] + create_date_array[2]
     decrypt_numbers << create_key_array_for_decoder(string)[3] + create_date_array[3]
     decrypt_numbers
-    # binding.pry
   end
 
   def decrypt_array(string)
@@ -205,7 +185,5 @@ class Enigma
       new_message << alphabet_rotation[0][number]
     end
     new_message.join
-    # binding.pry
   end
-
 end
